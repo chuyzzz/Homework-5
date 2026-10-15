@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Customs — Desk Ticket Plan</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#5c6678; --line:#d9deea; --accent:#2457c5; --panel:#f6f8fc; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:#eef1f7; color:var(--ink); font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; }
+    main { max-width:980px; margin:40px auto; padding:0 20px 48px; }
+    h1 { margin-bottom:6px; font-size:clamp(1.7rem,3vw,2.4rem); }
+    .intro { color:var(--muted); margin-top:0; }
+    .tabs { display:flex; flex-wrap:wrap; gap:8px; margin:26px 0 0; }
+    .tabs button { border:1px solid var(--line); border-bottom:0; border-radius:8px 8px 0 0; background:#e2e7f1; color:var(--ink); cursor:pointer; padding:11px 18px; font:inherit; }
+    .tabs button[aria-selected="true"] { background:white; color:var(--accent); font-weight:700; }
+    .panel { background:white; border:1px solid var(--line); border-radius:0 10px 10px 10px; padding:26px; box-shadow:0 8px 24px #26324a12; }
+    .panel[hidden] { display:none; }
+    h2 { margin-top:0; }
+    h3 { color:var(--accent); margin-bottom:6px; }
+    li { margin:7px 0; }
+    code { background:#edf1f8; border-radius:4px; padding:2px 5px; }
+    .actual { min-height:100px; border:1px dashed #aeb7c8; border-radius:7px; color:var(--muted); padding:14px; }
+    .comparison { width:100%; border-collapse:collapse; margin:16px 0 24px; font-size:13px; }
+    .comparison th, .comparison td { border-bottom:1px solid var(--line); padding:11px 10px; text-align:left; vertical-align:top; }
+    .comparison th { background:var(--panel); color:var(--muted); font:11px 'DM Mono', monospace; letter-spacing:.04em; text-transform:uppercase; }
+    .comparison td:first-child { width:18%; font-weight:700; }
+    .state { display:inline-block; border-radius:999px; padding:3px 8px; font:10px 'DM Mono', monospace; white-space:nowrap; }
+    .resolved { color:#20794d; background:#e1f5e9; }
+    .pending { color:#9a6723; background:#fff0d4; }
+    .empty { color:var(--muted); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Campus Customs desk-ticket plan</h1>
+  <p class="intro">Expected delegation and MCP evidence plan. The Actual sections are intentionally blank until the agents are run.</p>
+
+  <nav class="tabs" role="tablist" aria-label="Desk ticket tabs">
+    <button role="tab" aria-selected="true" aria-controls="ticket-101" id="tab-101">Ticket 101</button>
+    <button role="tab" aria-selected="false" aria-controls="ticket-102" id="tab-102">Ticket 102</button>
+    <button role="tab" aria-selected="false" aria-controls="ticket-103" id="tab-103">Ticket 103</button>
+    <button role="tab" aria-selected="false" aria-controls="cash" id="tab-cash">Cash</button>
+    <button role="tab" aria-selected="false" aria-controls="reflection" id="tab-reflection">Reflection</button>
+  </nav>
+
+  <section class="panel" role="tabpanel" id="ticket-101" aria-labelledby="tab-101">
+    <h2>Ticket 101 — Bulldog tee customer order</h2>
+    <table class="comparison"><thead><tr><th>Check</th><th>Expected</th><th>Actual</th><th>Status</th></tr></thead><tbody>
+      <tr><td>First call</td><td>Boss → Inventory to verify SKU, size, and stock.</td><td>Inventory context was retrieved through MCP.</td><td><span class="state resolved">Resolved</span></td></tr>
+      <tr><td>Delegation</td><td>Inventory → Accounting → Customer Service.</td><td>Boss, Inventory, and Accounting produced evidence-based results; no customer promise was made.</td><td><span class="state resolved">Resolved</span></td></tr>
+      <tr><td>MCP evidence</td><td>Use <code>get_customer_order_context(101)</code>.</td><td>0 in stock, Aisle B, vendor lead time 5 days; no verified ETA.</td><td><span class="state resolved">Resolved</span></td></tr>
+      <tr><td>Cash</td><td>No payment or purchase without human approval.</td><td>No cash movement; no approval submitted.</td><td><span class="state resolved">Unchanged</span></td></tr>
+      <tr><td>Ticket</td><td>Resolve after the run finishes.</td><td>Ticket 101 is resolved.</td><td><span class="state resolved">Resolved</span></td></tr>
+    </tbody></table>
+    <section><h3>Expected</h3>
+      <p><strong>First call:</strong> Boss calls Inventory first because the request depends on the exact SKU/size and whether the tee is available before a customer response is drafted.</p>
+      <p><strong>Delegation sequence:</strong></p>
+      <ol>
+        <li>Boss → Inventory: verify <code>CC-TEE-WHITE</code>, size S, quantity, and location.</li>
+        <li>Inventory → Boss: return the stock evidence; if replenishment timing or invoice cost needs review, delegate to Accounting.</li>
+        <li>Boss → Accounting: review the linked reprint invoice, vendor, amount, due date, and lead time before recommending a next step.</li>
+        <li>Boss → Customer Service: draft a factual customer response using the verified stock and replenishment evidence; no delivery promise without human approval.</li>
+      </ol>
+      <p><strong>Expected MCP tools:</strong> <code>get_customer_order_context(101)</code> for Inventory, Accounting, and Customer Service.</p>
+    </section>
+    <section><h3>Actual</h3><div class="actual"><strong>Completed run:</strong> Boss confirmed that <code>CC-TEE-WHITE</code>, size S, has 0 available in Aisle B. Bulldog Print Co. has a recorded five-day lead time, but no verified replenishment order or delivery ETA was found. The agent recommended not promising availability or a delivery date. Ticket 101 was marked resolved. <strong>Cash impact:</strong> none; no payment or purchase was approved, so Cash remains unchanged.</div></section>
+  </section>
+
+  <section class="panel" role="tabpanel" id="ticket-102" aria-labelledby="tab-102" hidden>
+    <h2>Ticket 102 — Rent notice</h2>
+    <table class="comparison"><thead><tr><th>Check</th><th>Expected</th><th>Actual</th><th>Status</th></tr></thead><tbody>
+      <tr><td>First call</td><td>Boss → Facilities to verify lease and due date.</td><td>Facilities retrieved the rent context through MCP.</td><td><span class="state resolved">Resolved</span></td></tr>
+      <tr><td>Delegation</td><td>Facilities → Accounting → safe Customer Service acknowledgement.</td><td>Facilities and Accounting reviewed the lease and cash evidence; no payment was authorized.</td><td><span class="state resolved">Resolved</span></td></tr>
+      <tr><td>MCP evidence</td><td>Use <code>get_rent_notice_context(102)</code>.</td><td>$2,400 rent due 2026-09-02; checking balance $3,400; payment status unverified.</td><td><span class="state resolved">Resolved</span></td></tr>
+      <tr><td>Cash</td><td>Balance must not change from an agent recommendation.</td><td>Balance remained $3,400; no approval submitted.</td><td><span class="state resolved">Unchanged</span></td></tr>
+      <tr><td>Ticket</td><td>Resolve after the run finishes.</td><td>Ticket 102 is resolved.</td><td><span class="state resolved">Resolved</span></td></tr>
+    </tbody></table>
+    <section><h3>Expected</h3>
+      <p><strong>First call:</strong> Boss calls Facilities first because the ticket is a lease and rent-timing issue, so the linked lease and due date must be confirmed before any financial recommendation.</p>
+      <p><strong>Delegation sequence:</strong></p>
+      <ol>
+        <li>Boss → Facilities: verify the lease, landlord, shop space, rent amount, and due date.</li>
+        <li>Facilities → Accounting: request a cash and payment-risk review after confirming the lease facts.</li>
+        <li>Accounting → Boss: report the checking balance and whether human payment review is needed; do not authorize payment.</li>
+        <li>Boss → Customer Service: prepare a safe acknowledgement for the requester only after the internal facts are verified.</li>
+      </ol>
+      <p><strong>Expected MCP tools:</strong> <code>get_rent_notice_context(102)</code> for Facilities and Accounting.</p>
+    </section>
+    <section><h3>Actual</h3><div class="actual"><strong>Completed run:</strong> Facilities and Accounting confirmed the Chapel Street shop lease, Elm City Properties, monthly rent of $2,400, and due date 2026-09-02. Payment status remained unverified because no matching transaction or scheduled payment appeared in the available context. The agent recommended human verification and did not authorize payment. Ticket 102 was marked resolved. <strong>Cash impact:</strong> none; the checking balance remained $3,400.</div></section>
+  </section>
+
+  <section class="panel" role="tabpanel" id="ticket-103" aria-labelledby="tab-103" hidden>
+    <h2>Ticket 103 — Bulk hoodie discount</h2>
+    <table class="comparison"><thead><tr><th>Check</th><th>Expected</th><th>Actual</th><th>Status</th></tr></thead><tbody>
+      <tr><td>First call</td><td>Boss → Customer Service to frame a safe response.</td><td>Customer Service started and retrieved the bulk-discount context.</td><td><span class="state resolved">Partly done</span></td></tr>
+      <tr><td>Delegation</td><td>Customer Service → Inventory and Accounting, then Boss review.</td><td>Customer Service, Inventory, Accounting, and Boss completed the evidence review. No fulfillment or discount was authorized.</td><td><span class="state resolved">Resolved</span></td></tr>
+      <tr><td>MCP evidence</td><td>Use <code>get_bulk_discount_context(103)</code>.</td><td>20 requested, 8 size-M available, $22 unit cost, $58 list price.</td><td><span class="state resolved">Retrieved</span></td></tr>
+      <tr><td>Cash</td><td>No cash change for a discount request.</td><td>No discount or payment was approved; Cash is unchanged.</td><td><span class="state resolved">Unchanged</span></td></tr>
+      <tr><td>Ticket</td><td>Resolve only after the full run finishes.</td><td>Ticket 103 was resolved after the completed run.</td><td><span class="state resolved">Resolved</span></td></tr>
+    </tbody></table>
+    <section><h3>Expected</h3>
+      <p><strong>First call:</strong> Boss calls Customer Service first because the requester needs a customer-facing response, but the response must be grounded in inventory and pricing evidence before any discount is suggested.</p>
+      <p><strong>Delegation sequence:</strong></p>
+      <ol>
+        <li>Boss → Customer Service: clarify the requested quantity, size, and desired response without promising a discount.</li>
+        <li>Customer Service → Inventory: verify size-M stock against the requested quantity.</li>
+        <li>Customer Service → Accounting: review unit cost and list price to identify the margin facts relevant to a possible discount.</li>
+        <li>Boss → Customer Service: draft a conditional response based on both MCP results; human approval is required for any final price.</li>
+      </ol>
+      <p><strong>Expected MCP tools:</strong> <code>get_bulk_discount_context(103)</code> for Inventory, Accounting, and Customer Service.</p>
+    </section>
+    <section><h3>Actual</h3><div class="actual"><strong>Completed run:</strong> Boss confirmed that Yale AI Club requested 20 <code>CC-HOOD-NAVY</code> hoodies in size M, while the database lists 8 at Aisle A. The 12-unit gap, stock freshness, reservable quantity, vendor evidence, and any approved bulk-pricing policy were not verified. The team recommended checking live stock and obtaining human pricing approval before making any promise. Ticket 103 was marked resolved. <strong>Cash impact:</strong> none; no discount or payment was approved.</div></section>
+  </section>
+
+  <section class="panel" role="tabpanel" id="cash" aria-labelledby="tab-cash" hidden>
+    <h2>Cash control</h2>
+    <p class="intro">This tab records what the agents observed and what changed only after human approval.</p>
+    <div class="balance-card" style="margin:18px 0; max-width:260px;"><div class="balance-label"><span>●</span> CHECKING BALANCE</div><div class="balance">$3,400.00</div><small>as of 2026-08-31 · no approved payments</small></div>
+    <table class="comparison"><thead><tr><th>Ticket</th><th>Cash-related expectation</th><th>Actual impact</th><th>Status</th></tr></thead><tbody>
+      <tr><td>101 · Customer order</td><td>No purchase or payment without human approval.</td><td>No cash movement; balance stayed $3,400.</td><td><span class="state resolved">Unchanged</span></td></tr>
+      <tr><td>102 · Rent notice</td><td>Accounting may review $2,400 rent against the balance, but cannot authorize it.</td><td>Payment remained unverified; no payment was approved. Balance stayed $3,400.</td><td><span class="state resolved">Unchanged</span></td></tr>
+      <tr><td>103 · Bulk discount</td><td>A discount recommendation must not alter cash.</td><td>No discount or purchase was approved. Balance stayed $3,400.</td><td><span class="state resolved">Unchanged</span></td></tr>
+    </tbody></table>
+    <div class="approve"><div><p class="eyebrow">HUMAN APPROVAL ONLY</p><h3>What can change the balance?</h3><p class="muted">Only an authorized human approval through <code>POST /approvals</code> records a payment, decreases checking cash, and resolves the related ticket. Agent runs only prepare recommendations.</p></div></div>
+  </section>
+  <section class="panel" role="tabpanel" id="reflection" aria-labelledby="tab-reflection" hidden>
+    <h2>Reflection</h2>
+    <p class="intro">Quick note: “Actual” here means what the code is built to do. I haven’t saved a full live run in <code>audit_trail.json</code> yet, so I’m not making up any agent conversations.</p>
+
+    <h3>How I would evaluate the agents</h3>
+    <p>I think initially it was hard to evaluate whether agent has solve the task because of the way it was displayed - not very granular breakdown of what has been achived and what was not resolved; after the edit I asked the agent to display the results in a table format, it was easier to judge --- line by line item what was resolved or not</p>
+
+    <h3>Expected versus Actual</h3>
+    <ul>
+      <li><strong>101 (tee order):</strong> I expected Boss → Inventory → Accounting → Customer Service, using <code>get_customer_order_context</code>. The setup matches that. I still need a live run to see the real order the agents go in. Cash shouldn’t move.</li>
+      <li><strong>102 (rent):</strong> I expected Boss → Facilities → Accounting, then a short note from Customer Service, using <code>get_rent_notice_context</code>. The agents can look at the rent, but they can’t pay it. One thing that’s off: the ticket gets marked “resolved” right after the run, even though nobody has paid the rent yet. Cash stays at $3,400 until a human approves.</li>
+      <li><strong>103 (hoodie discount):</strong> I expected Boss → Customer Service → Inventory and Accounting, using <code>get_bulk_discount_context</code>. The tool gives the key numbers: 20 wanted, 8 in stock, $22 cost, $58 list price. I still need a live run to check what the agents actually say. Cash shouldn’t move.</li>
+    </ul>
+
+    <h3>What would be simpler as one agent with tools?</h3>
+    <p>Honestly, 101 and 103 could each be handled by one agent. The MCP tool already pulls all the facts together in one call, so passing the job between five agents doesn’t add much. It just makes it clearer who did what. 102 is where splitting makes sense, because reading the lease and dealing with money are different risks, and keeping them apart makes it harder to pay by accident. Either way, only a human should be able to move cash.</p>
+
+    <h3>Three new problems the team could solve now</h3>
+    <ol>
+      <li><strong>Suggest a restock for 101:</strong> Inventory sees there are no size-S tees, and Accounting checks the $840 reprint invoice. The team suggests a restock. A human still has to approve buying anything.</li>
+      <li><strong>Check if we can pay rent (102):</strong> Facilities checks the due date, and Accounting checks the balance. The team can say “$2,400 rent, $3,400 in the bank, we’re fine,” but only a human can actually pay.</li>
+      <li><strong>Reply to the bulk order (103):</strong> Customer Service explains we only have 8 of the 20 hoodies, and Accounting works out how much room there is for a discount. A human signs off on the final quote.</li>
+    </ol>
+
+    <h3>Three problems the team cannot solve yet</h3>
+    <ol>
+      <li><strong>Actually order the tee reprint:</strong> There’s no tool for placing orders or talking to vendors. We’d need a purchasing tool, approval rules, and a record of each order.</li>
+      <li><strong>Actually send emails to the customer or landlord:</strong> The agents can write the message, but they can’t send it. We’d need an email tool and a “human clicks send” step.</li>
+      <li><strong>Actually hold or ship the 20 hoodies:</strong> There are no tools for reserving stock or shipping. We’d need a shipping agent plus tools to hold the 8 we have and source the other 12.</li>
+    </ol>
+  </section>
+</main>
+<script>
+  const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const panels = [...document.querySelectorAll('[role="tabpanel"]')];
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(item => item.setAttribute('aria-selected', item === tab ? 'true' : 'false'));
+    panels.forEach(panel => { panel.hidden = panel.id !== tab.getAttribute('aria-controls'); });
+  }));
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+pydantic-ai-slim[openai,mcp]
+mcp<2
+python-dotenv
+fastapi
+uvicorn

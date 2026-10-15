@@ -1,0 +1,26 @@
+[
+  {
+    "id": 101,
+    "subject": "Bulldog tee",
+    "type": "customer_order",
+    "requester": "Tauhid Zaman",
+    "status": "resolved",
+    "resolution": "No stock or verified delivery ETA; no money movement."
+  },
+  {
+    "id": 102,
+    "subject": "Rent due",
+    "type": "rent_notice",
+    "requester": "Elm City Properties",
+    "status": "resolved",
+    "resolution": "Rent and due date reviewed; payment remained unverified and unapproved."
+  },
+  {
+    "id": 103,
+    "subject": "Bulk hoodie discount",
+    "type": "price_override",
+    "requester": "Yale AI Club",
+    "status": "resolved",
+    "resolution": "8 listed against 20 requested; no discount or purchase approved."
+  }
+]

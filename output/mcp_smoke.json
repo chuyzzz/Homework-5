@@ -1,0 +1,67 @@
+[
+  {
+    "prompt": "For ticket 101, check the requested product and size, current stock, and the linked reprint invoice and vendor lead time.",
+    "tool_name": "get_customer_order_context",
+    "output": {
+      "ticket_id": 101,
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "subject": "Bulldog tee",
+      "sku": "CC-TEE-WHITE",
+      "size": "S",
+      "qty": 1,
+      "status": "open",
+      "notes": "Needs a tee in size S.",
+      "inventory_qty": 0,
+      "inventory_location": "Aisle B",
+      "invoice_id": 501,
+      "invoice_amount": 840.0,
+      "invoice_due_date": "2026-08-28",
+      "invoice_status": "open",
+      "vendor_id": 1,
+      "vendor_name": "Bulldog Print Co",
+      "vendor_lead_days": 5
+    }
+  },
+  {
+    "prompt": "For ticket 102, retrieve the linked lease details and current checking balance so the rent notice can be assessed.",
+    "tool_name": "get_rent_notice_context",
+    "output": {
+      "ticket_id": 102,
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "subject": "Rent due",
+      "status": "open",
+      "notes": "Email: shop rent due in 2 days.",
+      "lease_id": 1,
+      "space_name": "Chapel Street shop",
+      "landlord": "Elm City Properties",
+      "monthly_rent": 2400.0,
+      "next_due": "2026-09-02",
+      "lease_notes": null,
+      "cash_account": "checking",
+      "cash_balance": 3400.0,
+      "cash_as_of": "2026-08-31"
+    }
+  },
+  {
+    "prompt": "For ticket 103, retrieve the requested quantity, size-M stock, and SKU cost and list price for the bulk discount decision.",
+    "tool_name": "get_bulk_discount_context",
+    "output": {
+      "ticket_id": 103,
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "subject": "Bulk hoodie discount",
+      "sku": "CC-HOOD-NAVY",
+      "size": "M",
+      "requested_qty": 20,
+      "status": "open",
+      "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.",
+      "product_name": "Basic Hoodie Big Yale",
+      "inventory_qty": 8,
+      "inventory_location": "Aisle A",
+      "unit_cost": 22.0,
+      "list_price": 58.0
+    }
+  }
+]
